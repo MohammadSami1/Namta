@@ -2,36 +2,138 @@
 <html>
 <head>
     <title>Namta App</title>
+
+    <style>
+        body {
+            font-family: "Noto Sans Bengali", Arial;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            text-align: center;
+            width: 320px;
+        }
+
+        h2 {
+            margin-bottom: 10px;
+        }
+
+        .top-text {
+            color: #ff5722;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            font-size: 15px;
+        }
+
+        input:focus {
+            border-color: #667eea;
+            outline: none;
+            box-shadow: 0 0 5px #667eea;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 10px;
+            background: #667eea;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background: #5a67d8;
+        }
+
+        #output {
+            margin-top: 15px;
+            text-align: left;
+            font-size: 16px;
+        }
+
+        .fb-link {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 12px;
+            background: #1877f2;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .fb-link:hover {
+            background: #145dbf;
+        }
+    </style>
 </head>
+
 <body>
 
-    <h2>Namta Generator</h2>
+<div class="card">
+    <div class="top-text">😎 সামি কে ধন্যবাদ জানাতে ভুলো না কিন্তু!</div>
 
-    <input type="text" id="name" placeholder="তোমার নাম"><br><br>
-    <input type="number" id="num" placeholder="কত এর নামতা"><br><br>
-    <input type="number" id="limit" placeholder="কত পর্যন্ত"><br><br>
+    <h2>📘 নামতা জেনারেটর</h2>
+
+    <input type="text" id="name" placeholder="তোমার নাম">
+    <input type="text" id="num" placeholder="কত এর নামতা">
+    <input type="text" id="limit" placeholder="কত পর্যন্ত">
 
     <button onclick="generateNamta()">Generate</button>
 
-    <h3 id="output"></h3>
+    <div id="output"></div>
+</div>
 
-    <script>
-        function generateNamta() {
-            let name = document.getElementById("name").value;
-            let num = document.getElementById("num").value;
-            let limit = document.getElementById("limit").value;
+<script>
+    function convertBanglaToEnglish(num) {
+        let bangla = "০১২৩৪৫৬৭৮৯";
+        let english = "0123456789";
 
-            let result = "অভিনন্দন " + name + "!<br>";
-
-            for(let i = 1; i <= limit; i++) {
-                result += num + " x " + i + " = " + (num*i) + "<br>";
-            }
-
-            result += "<br>সামি কে ধন্যবাদ জানাতে ভুলো না কিন্তু 😎";
-
-            document.getElementById("output").innerHTML = result;
+        for (let i = 0; i < bangla.length; i++) {
+            num = num.replaceAll(bangla[i], english[i]);
         }
-    </script>
+        return num;
+    }
+
+    function generateNamta() {
+        let name = document.getElementById("name").value;
+        let num = document.getElementById("num").value;
+        let limit = document.getElementById("limit").value;
+
+        num = convertBanglaToEnglish(num);
+        limit = convertBanglaToEnglish(limit);
+
+        let result = "<b>অভিনন্দন " + name + "!</b><br><br>";
+
+        for (let i = 1; i <= limit; i++) {
+            result += num + " × " + i + " = " + (num*i) + "<br>";
+        }
+
+        result += "<br>😎 সামি কে ধন্যবাদ জানাতে ভুলো না কিন্তু!<br>";
+        result += '<a class="fb-link" href="https://fb.com/sami.ku.phy" target="_blank">👉 Follow Sami on Facebook</a>';
+
+        document.getElementById("output").innerHTML = result;
+    }
+</script>
 
 </body>
 </html>
