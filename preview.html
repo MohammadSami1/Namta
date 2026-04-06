@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Namta App</title>
+</head>
+<body>
+
+    <h2>Namta Generator</h2>
+
+    <input type="text" id="name" placeholder="তোমার নাম"><br><br>
+    <input type="number" id="num" placeholder="কত এর নামতা"><br><br>
+    <input type="number" id="limit" placeholder="কত পর্যন্ত"><br><br>
+
+    <button onclick="generateNamta()">Generate</button>
+
+    <h3 id="output"></h3>
+
+    <script>
+        function generateNamta() {
+            let name = document.getElementById("name").value;
+            let num = document.getElementById("num").value;
+            let limit = document.getElementById("limit").value;
+
+            let result = "অভিনন্দন " + name + "!<br>";
+
+            for(let i = 1; i <= limit; i++) {
+                result += num + " x " + i + " = " + (num*i) + "<br>";
+            }
+
+            result += "<br>সামি কে ধন্যবাদ জানাতে ভুলো না কিন্তু 😎";
+
+            document.getElementById("output").innerHTML = result;
+        }
+    </script>
+
+</body>
+</html>
